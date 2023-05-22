@@ -1,0 +1,60 @@
+/* resources/css/styles.css */
+
+.container {
+  margin: 100px auto;
+  max-width: 500px;
+  padding: 40px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 26px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.offcanvas-body {
+  background-color: #f8f9fa;
+  /* Color de fondo del menú */
+  padding: 20px;
+}
+
+.menu-link {
+  display: block;
+  color: #333;
+  /* Color del texto del enlace */
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  /* Efecto de transición al hacer hover */
+}
+
+.menu-link:hover {
+  background-color: #e9ecef;
+  /* Color de fondo al hacer hover */
+}
+
+.menu-link i {
+  font-size: 20px;
+  /* Tamaño del ícono */
+}
+
+.menu-link span {
+  font-size: 16px;
+  /* Tamaño del texto */
+  margin-left: 10px;
+}
