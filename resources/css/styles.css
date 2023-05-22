@@ -17,14 +17,6 @@ label {
   margin-bottom: 5px;
 }
 
-input {
-  width: 100%;
-  padding: 10px 15px;
-  font-size: 26px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
 
 .offcanvas-body {
   background-color: #f8f9fa;
@@ -58,3 +50,35 @@ input {
   /* Tamaño del texto */
   margin-left: 10px;
 }
+
+.custom-table {
+  background-color: #f2f2f2;
+}
+
+.custom-table tr {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  max-width: 80%;
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 8px;
+}
+
+/* Estilo personalizado para el campo de búsqueda */
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  width: 200px;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+  font-weight: bold;
+}
+

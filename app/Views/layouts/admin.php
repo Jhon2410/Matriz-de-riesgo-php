@@ -9,9 +9,10 @@
         <?php echo $pageTitle; ?>
     </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./../../../resources/css/styles.css">
-    <link rel="stylesheet" href="./../../resources/css/theme.css">
+    <link rel="stylesheet" href="./../../../../resources/css/styles.css">
+    <link rel="stylesheet" href="./../../../../resources/css/theme.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -47,25 +48,25 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <a href="./main.php" class="menu-link">
+            <a href="../home/main.php" class="menu-link">
                 <i class="bi bi-grid-fill me-2"></i>
                 <span>Matriz de riesgo</span>
             </a>
-            <a href="./users.php" class="menu-link">
+            <a href="../users/index.php" class="menu-link">
                 <i class="bi bi-people-fill me-2"></i>
                 <span>Administrar usuarios</span>
             </a>
-            <a href="./settings.php" class="menu-link">
+            <a href="../settings/settings/settings.php" class="menu-link">
                 <i class="bi bi-gear-fill me-2"></i>
                 <span>Configuración</span>
             </a>
         </div>
 
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </body>
 
 </html>
