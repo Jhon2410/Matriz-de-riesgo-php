@@ -81,4 +81,61 @@ label {
 .dataTables_wrapper .dataTables_filter label {
   font-weight: bold;
 }
+* {
+  font-weight: bold;
+}
+.matriz-riesgo-table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
 
+.matriz-riesgo-table th,
+.matriz-riesgo-table td {
+  padding: 10px;
+}
+
+.matriz-riesgo-table th {
+  background-color: #f2f2f2;
+}
+
+.matriz-riesgo-table th:first-child,
+.matriz-riesgo-table td:first-child {
+  font-weight: bold;
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.matriz-riesgo-table td {
+  background-color: #ffffff;
+}
+
+.matriz-riesgo-table .controlable {
+  background-color: #6ECB63;
+  color: #ffffff;
+}
+
+.matriz-riesgo-table .atencion {
+  background-color: #FFD166;
+  color: #ffffff;
+}
+
+.matriz-riesgo-table .prioridad {
+  background-color: #EF476F;
+  color: #ffffff;
+}
+
+.matriz-riesgo-table .importante {
+  background-color: #FFD166;
+  color: #ffffff;
+}
+
+.matriz-riesgo-table .alta-prioridad {
+  background-color: #EF476F;
+  color: #ffffff;
+}
+
+.matriz-riesgo-table .critico {
+  background-color: #FF3860;
+  color: #ffffff;
+}
