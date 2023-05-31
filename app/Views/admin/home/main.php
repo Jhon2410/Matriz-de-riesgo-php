@@ -21,8 +21,14 @@ require '../../layouts/admin.php';
     <tbody>
         <tr>
             <th>Bajo</th>
-            <td class="controlable">Controlable</td>
-            <td class="atencion">Atención</td>
+            <td class="controlable">
+                <p class="shadow-item"><span>Controlable</span> <i class="bi bi-info-circle-fill"></i> </p>
+                <p class="shadow-item">Controlable</p>
+                <p class="shadow-item">Controlable</p>
+            </td>
+            <td class="atencion">
+            <p class="shadow-item">Atención</p>    
+            </td>
             <td class="prioridad">Prioridad</td>
         </tr>
         <tr>

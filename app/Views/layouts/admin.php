@@ -34,7 +34,7 @@
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Perfil</a></li>
                 <li><a class="dropdown-item" href="#">Configuración</a></li>
-                <li><a class="dropdown-item" href="../login.php">Salir</a></li>
+                <li><a class="dropdown-item" href="../../login.php">Salir</a></li>
             </ul>
         </span>
     </div>
@@ -52,13 +52,17 @@
                 <i class="bi bi-grid-fill me-2"></i>
                 <span>Matriz de riesgo</span>
             </a>
+            <a href="../manage/index.php" class="menu-link">
+                <i class="bi bi-kanban-fill"></i>
+                <span>Administrar matrices de riesgo</span>
+            </a>
             <a href="../users/index.php" class="menu-link">
                 <i class="bi bi-people-fill me-2"></i>
                 <span>Administrar usuarios</span>
             </a>
-            <a href="../settings/settings/settings.php" class="menu-link">
-                <i class="bi bi-gear-fill me-2"></i>
-                <span>Configuración</span>
+            <a href="../info/index.php" class="menu-link">
+            <i class="bi bi-info-square-fill"></i>
+                <span>Información</span>
             </a>
         </div>
 
