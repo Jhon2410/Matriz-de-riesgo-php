@@ -19,22 +19,34 @@ $content = ob_get_clean();
                 </div>
                 <div class="modal-body">
                     <!-- Contenido del formulario -->
-                    <form action="../../../Controllers/RegistrarUsuariosController.php" method="POST">
+                    <form name="formUser" action=
+                    <?php
+                    if ($isEdit) {
+                        echo './../../../Controllers/EditarUsuarioController.php';
+                    } else {
+                        echo '../../../Controllers/RegistrarUsuariosController.php';
+                    }
+                    ?>
+                     method="POST">
+                        <div class="mb-3 d-none">
+                            <label for="idInput" class="form-label">id</label>
+                            <input type="text" class="form-control" id="idInput" name="id">
+                        </div>
                         <div class="mb-3">
                             <label for="nombreInput" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombreInput" name="nombre">
                         </div>
                         <div class="mb-3">
                             <label for="emailInput" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="emailInput" name="email" >
+                            <input type="email" class="form-control" id="emailInput" name="email">
                         </div>
                         <div class="mb-3">
                             <label for="contraseñaInput" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="contraseñaInput" name="contraseña" >
+                            <input type="password" class="form-control" id="contraseñaInput" name="contraseña">
                         </div>
                         <div class="mb-3">
                             <label for="rolSelect" class="form-label">Rol</label>
-                            <select class="form-select" id="rolSelect" name="rol" >
+                            <select class="form-select" id="rolSelect" name="rol">
                                 <option selected>Selecciona un rol</option>
                                 <option value="administrador">Administrador</option>
                                 <option value="empresa">Empresa</option>
@@ -63,8 +75,17 @@ $content = ob_get_clean();
 
 <script>
     const crearModal = new bootstrap.Modal(document.getElementById('crearModal'));
+    const crearBtn = document.getElementById('crearBtn');
+    const formUser = document.getElementsByName('formUser');
+
+    crearBtn.addEventListener('click', function () {
+        formUser[0].action = '../../../Controllers/RegistrarUsuariosController.php';
+    });
 
     function openModal() {
         crearModal.show();
     }
+
+
+
 </script>

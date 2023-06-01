@@ -6,7 +6,7 @@ require_once '../util/db.php';
 class UsuarioController {
     public function actualizarUsuario($id, $nombre, $email, $tipo, $estado) {
         // Verificar si se ha enviado el ID y los datos del usuario
-        if (!empty($id) && !empty($nombre) && !empty($email)) {
+        if (!empty($id) && !empty($nombre) && !empty($email) && !empty($tipo) && !empty($estado)) {
             // Conectar a la base de datos
             $db = Database::getConnection();
             

@@ -7,6 +7,7 @@ ob_start();
 $content = ob_get_clean();
 require '../../../Controllers/ObtenerUsuariosController.php';
 require '../../layouts/admin.php';
+$isEdit = false;
 ?>
 
 <!-- Contenido específico de la vista -->
@@ -85,17 +86,20 @@ require '../../layouts/admin.php';
     <script src="./../../../../resources/js/script.js"></script>
     <script>
         const setUserToEdit = (user) => {
-            debugger;
             if (!user) {
                 return;
             }
-            const userIdInput = document.getElementById('userId');
+            
+            const userIdInput = document.getElementById('idInput');
             const nombreInput = document.getElementById('nombreInput');
             const emailInput = document.getElementById('emailInput');
             const contraseñaInput = document.getElementById('contraseñaInput');
             const rolSelect = document.getElementById('rolSelect');
             const estadoSelect = document.getElementById('estadoSelect');
+            const formUser = document.getElementsByName('formUser');
 
+            formUser[0].action = '../../../Controllers/ActualizarUsuariosController.php';
+            userIdInput.value = user.id;
             nombreInput.value = user.name;
             emailInput.value = user.email;
             contraseñaInput.value = user.password;
