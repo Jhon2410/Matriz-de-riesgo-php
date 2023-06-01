@@ -7,7 +7,6 @@ ob_start();
 $content = ob_get_clean();
 require '../../../Controllers/ObtenerUsuariosController.php';
 require '../../layouts/admin.php';
-
 ?>
 
 <!-- Contenido específico de la vista -->
@@ -29,6 +28,7 @@ require '../../layouts/admin.php';
     <table id="miTabla" class="display custom-table table">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Nombres</th>
                 <th>Correo electrónico</th>
                 <th>Rol</th>
@@ -39,27 +39,71 @@ require '../../layouts/admin.php';
         <tbody>
             <?php foreach ($users as $user): ?>
                 <tr>
-                    <td><?php echo $user['name']; ?></td>
-                    <td><?php echo $user['email']; ?></td>
-                    <td><?php echo $user['role']; ?></td>
-                    <td><?php echo $user['status']; ?></td>
                     <td>
-                        <form action="../../../Controllers/EliminarUsuarioController.php" method="POST" style="display: inline;">
+                        <?php echo $user['id']; ?>
+                    </td>
+                    <td>
+                        <?php echo $user['name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $user['email']; ?>
+                    </td>
+                    <td>
+                        <?php echo $user['role']; ?>
+                    </td>
+                    <td>
+                        <?php echo $user['status']; ?>
+                    </td>
+                    <td>
+                        <form action="../../../Controllers/EliminarUsuarioController.php" method="POST"
+                            style="display: inline;">
                             <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                             <button type="submit" class="btn btn-sm btn-danger">
                                 <i class="bi bi-trash-fill"></i>
                             </button>
                         </form>
-                        <a href="/actualizar-usuario?id=<?php echo $user['id']; ?>" class="btn btn-sm btn-primary">
+                        <button class="btn btn-primary btn-sm" onclick='setUserToEdit(<?php echo json_encode($user); ?>)'
+                            data-user-id="<?php echo $user['id']; ?>">
                             <i class="bi bi-pencil-fill"></i>
-                        </a>
+                        </button>
+
+
+
+                        <button class="btn btn-primary btn-sm d-none" data-bs-toggle="modal" data-bs-target="#crearModal"
+                            data-user-id="<?php echo $user['id']; ?>">
+                            <i class="bi bi-pencil-fill"></i>
+                        </button>
+
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-    
+
     <script src="//code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="./../../../../resources/js/script.js"></script>
+    <script>
+        const setUserToEdit = (user) => {
+            debugger;
+            if (!user) {
+                return;
+            }
+            const userIdInput = document.getElementById('userId');
+            const nombreInput = document.getElementById('nombreInput');
+            const emailInput = document.getElementById('emailInput');
+            const contraseñaInput = document.getElementById('contraseñaInput');
+            const rolSelect = document.getElementById('rolSelect');
+            const estadoSelect = document.getElementById('estadoSelect');
+
+            nombreInput.value = user.name;
+            emailInput.value = user.email;
+            contraseñaInput.value = user.password;
+            rolSelect.value = user.role;
+            estadoSelect.value = user.status;
+
+            $('#crearModal').modal('show');
+        }
+
+    </script>
 </div>

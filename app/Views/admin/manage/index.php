@@ -4,59 +4,11 @@ $pageTitle = 'Administrar matrices de riesgo';
 ob_start();
 $content = ob_get_clean();
 require '../../layouts/admin.php';
-$users = [
+$matrices = [
     [
         'name' => 'John Doe',
         'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
-    [
-        'name' => 'John Doe',
-        'email' => 'asd'
-    ],
+    ]
 ];
 ?>
 
@@ -77,7 +29,7 @@ $users = [
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($users as $user): ?>
+            <?php foreach ($matrices as $matriz): ?>
                 <tr>
                     <td>John Doe</td>
                     <td>john.doe@example.com</td>

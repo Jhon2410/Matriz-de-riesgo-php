@@ -2,6 +2,7 @@
 $pageTitle = 'Administrar usuarios';
 ob_start();
 $content = ob_get_clean();
+
 ?>
 <!-- Contenido específico de la vista -->
 <div class="container-fluid my-3 d-flex justify-content-end">
@@ -25,15 +26,15 @@ $content = ob_get_clean();
                         </div>
                         <div class="mb-3">
                             <label for="emailInput" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="emailInput" name="email">
+                            <input type="email" class="form-control" id="emailInput" name="email" >
                         </div>
                         <div class="mb-3">
                             <label for="contraseñaInput" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="contraseñaInput" name="contraseña">
+                            <input type="password" class="form-control" id="contraseñaInput" name="contraseña" >
                         </div>
                         <div class="mb-3">
                             <label for="rolSelect" class="form-label">Rol</label>
-                            <select class="form-select" id="rolSelect" name="rol">
+                            <select class="form-select" id="rolSelect" name="rol" >
                                 <option selected>Selecciona un rol</option>
                                 <option value="administrador">Administrador</option>
                                 <option value="empresa">Empresa</option>
