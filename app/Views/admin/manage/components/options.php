@@ -32,6 +32,7 @@ $content = ob_get_clean();
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="reset" id="btnReset" class="btn btn-secondary" data-bs-dismiss="modal">limpiar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
@@ -48,6 +49,7 @@ $content = ob_get_clean();
     const form = document.getElementsByName('form');
 
     crearBtn.addEventListener('click', function () {
+        document.getElementById('btnReset').click();
         form[0].action = '../../../Controllers/matriz/MatrizController.php?action=crear';
     });
     function openModal() {

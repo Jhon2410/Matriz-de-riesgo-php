@@ -4,9 +4,10 @@ $pageTitle = 'Administrar matrices de riesgo';
 ob_start();
 $content = ob_get_clean();
 require '../../layouts/admin.php';
+require '../../../helpers/clasificador.php';
 $error = isset($_GET['error']) ? $_GET['error'] : null;
 $mensaje = isset($_GET['mensaje']) ? $_GET['mensaje'] : null;
-require '../../../Controllers/matriz/ObtenerMatrizController.php';
+require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
 ?>
 
 <!-- Contenido específico de la vista -->
@@ -50,12 +51,10 @@ require '../../../Controllers/matriz/ObtenerMatrizController.php';
                             <button type="submit" class="btn btn-sm btn-danger">
                                 <i class="bi bi-trash-fill"></i>
                             </button>
-                            
                         </form>
                         <a href="./registros.php?matriz_id=<?php echo $matriz['id'] ?>" class="btn btn-sm btn-info">
                                 <i class="bi bi-plus-circle-fill"></i>
                             </a>
-
                     </td>
                 </tr>
             <?php endforeach; ?>

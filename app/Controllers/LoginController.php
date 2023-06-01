@@ -21,6 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_P
 
     // Verificar si se encontró un usuario con las credenciales proporcionadas
     if ($result->num_rows === 1) {
+        // Valor que deseas guardar en la cookie
+        $valor = $query;
+
+        // Duración de la cookie en segundos (por ejemplo, 1 hora)
+        $duracion = time() + 3600;
+
+        // Configurar la cookie utilizando setcookie()
+        setcookie("mi_cookie", $valor, $duracion, "/");
         // Redirigir al usuario a la página de inicio después de iniciar sesión exitosamente
         header('Location: ../Views/admin/home/main.php');
         exit;
