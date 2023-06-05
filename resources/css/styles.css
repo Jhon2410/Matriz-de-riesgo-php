@@ -1,10 +1,17 @@
-/* resources/css/styles.css */
+body {
+  background-color: #061372;
+  color: #fff;
+  font-family: "Arial", sans-serif;
+  overflow: hidden;
+  font-size: large;
+  font-weight: bold;
+}
 
 .container {
   margin: 100px auto;
   max-width: 500px;
   padding: 40px;
-  background-color: #f5f5f5;
+  background-color: #21059e;
   border-radius: 5px;
 }
 
@@ -17,52 +24,47 @@ label {
   margin-bottom: 5px;
 }
 
-
 .offcanvas-body {
-  background-color: #f8f9fa;
-  /* Color de fondo del menú */
+  background-color: #0c70d4;
   padding: 20px;
 }
 
 .menu-link {
   display: block;
   color: #333;
-  /* Color del texto del enlace */
   text-decoration: none;
   padding: 10px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  /* Efecto de transición al hacer hover */
 }
 
 .menu-link:hover {
   background-color: #e9ecef;
-  /* Color de fondo al hacer hover */
 }
 
 .menu-link i {
   font-size: 20px;
-  /* Tamaño del ícono */
 }
 
 .menu-link span {
   font-size: 16px;
-  /* Tamaño del texto */
   margin-left: 10px;
 }
 
 .custom-table {
-  background-color: #f2f2f2;
+  color: #0b3cc0 !important;
 }
 
 .custom-table tr {
-  background-color: #fff;
+  background-color: #c60af58f;
+  box-shadow: 2px 2px 5px #0000003d;
   border-bottom: 1px solid #ddd;
+  color: #ffffff !important;
   max-width: 80%;
 }
 
 .custom-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #f9f9f923;
 }
 
 .custom-table th,
@@ -70,20 +72,18 @@ label {
   padding: 8px;
 }
 
-/* Estilo personalizado para el campo de búsqueda */
 .dataTables_wrapper .dataTables_filter input {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 5px;
   width: 200px;
+  text-shadow: 5px 5px 15px #fff;
 }
 
 .dataTables_wrapper .dataTables_filter label {
   font-weight: bold;
 }
-* {
-  font-weight: bold;
-}
+
 .matriz-riesgo-table {
   border-collapse: collapse;
   width: 100%;
@@ -97,6 +97,7 @@ label {
 
 .matriz-riesgo-table th {
   background-color: #f2f2f2;
+  color: #080808;
 }
 
 .matriz-riesgo-table th:first-child,
@@ -147,5 +148,47 @@ label {
 
 .shadow-item:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  transform: scale(1.5);
+  transform: scale(1.2);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 0.5px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  width: 25%;
+}
+
+a {
+  color: purple !important;
+}
+
+tr:hover {
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.425);
+}
+
+.modal > span,
+.modal > svg,
+.modal > i {
+  color: #000 !important;
+}
+
+form {
+  margin: 0 auto;
+  width: 100%;
+  color: #000;
+}
+
+.modal-title, select, input[type="text"], input[type="number"], input[type="date"], input[type="email"], input[type="password"], textarea {
+  color: #000 !important;
+}
+select, input[type="search"] {
+  color: #fff !important;
+
 }
