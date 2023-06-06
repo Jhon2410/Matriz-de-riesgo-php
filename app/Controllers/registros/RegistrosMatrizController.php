@@ -27,78 +27,69 @@ class Database
 
 class RegistroController
 {
-    public function crearRegistro($codigoMatriz, $fechaIdentificacion, $codigoRiesgo, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo)
+    public function crearRegistro($fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $matriz_id)
     {
-        // Realizar la inserción en la tabla "registros" (ajusta el nombre de la tabla según tu estructura)
         $conn = Database::getConnection();
         $query = "INSERT INTO registros (fecha_identificacion, riesgo, definicion_descripcion, causas, afecta_infraestructura_critica, activos_informacion_asociados, tipo_activo_vinculado, criticidad_activo, tipo_riesgo, posibilidad_ocurrencia, impacto, proceso_correctivo, matriz_riesgo_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($query);
         if ($stmt) {
-            $stmt->bind_param("sssssssssssss", $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $codigoMatriz);
+            $stmt->bind_param("sssssssssssss", $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $matriz_id);
 
             if ($stmt->execute()) {
-                // La inserción fue exitosa
                 echo "Registro creado correctamente.";
             } else {
-                // Ocurrió un error al insertar el registro
                 echo "Error al crear el registro: " . $stmt->error;
             }
 
             $stmt->close();
         } else {
-            // Ocurrió un error al preparar la consulta
             echo "Error al preparar la consulta: " . $conn->error;
         }
 
         $conn->close();
     }
 
-    public function actualizarRegistro($id, $codigoMatriz, $fechaIdentificacion, $codigoRiesgo, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo)
+    public function actualizarRegistro($id, $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo)
     {
-        // Actualizar el registro en la tabla "registros" (ajusta el nombre de la tabla según tu estructura)
         $conn = Database::getConnection();
         $query = "UPDATE registros SET  fecha_identificacion = ?, riesgo = ?, definicion_descripcion = ?, causas = ?, afecta_infraestructura_critica = ?, activos_informacion_asociados = ?, tipo_activo_vinculado = ?, criticidad_activo = ?, tipo_riesgo = ?, posibilidad_ocurrencia = ?, impacto = ?, proceso_correctivo = ? WHERE id = ?";
         $stmt = $conn->prepare($query);
+        if ($stmt) {
+            $stmt->bind_param("ssssssssssssi", $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $id);
 
-        if ($stmt === false) {
-            // Ocurrió un error al preparar la consulta
-            echo "Error al preparar la consulta: " . $conn->error;
-            return false;
-        }
+            if ($stmt->execute()) {
+                echo "Registro actualizado correctamente.";
+            } else {
+                echo "Error al actualizar el registro: " . $stmt->error;
+            }
 
-        $stmt->bind_param("ssssssssssssi", $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $id);
-
-        if ($stmt->execute()) {
-            // La actualización fue exitosa
-            return true;
+            $stmt->close();
         } else {
-            // Ocurrió un error al actualizar el registro
-            echo "Error al actualizar el registro: " . $stmt->error;
-            return false;
+            echo "Error al preparar la consulta: " . $conn->error;
         }
 
-        $stmt->close();
         $conn->close();
     }
 
-
     public function eliminarRegistro($id)
     {
-        // Eliminar el registro de la tabla "registros" (ajusta el nombre de la tabla según tu estructura)
         $conn = Database::getConnection();
         $query = "DELETE FROM registros WHERE id = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("i", $id);
+        if ($stmt) {
+            $stmt->bind_param("i", $id);
 
-        if ($stmt->execute()) {
-            // La eliminación fue exitosa
-            return true;
+            if ($stmt->execute()) {
+                echo "Registro eliminado correctamente.";
+            } else {
+                echo "Error al eliminar el registro: " . $stmt->error;
+            }
+
+            $stmt->close();
         } else {
-            // Ocurrió un error al eliminar el registro
-            return false;
+            echo "Error al preparar la consulta: " . $conn->error;
         }
 
-        $stmt->close();
         $conn->close();
     }
 }
@@ -114,9 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Crear un nuevo registro
         if ($action === 'crear') {
-            $codigoMatriz = $_POST['codigo'];
             $fechaIdentificacion = $_POST['fecha_identificacion'];
-            $codigoRiesgo = $_POST['codigo_riesgo'];
             $riesgo = $_POST['riesgo'];
             $definicionDescripcion = $_POST['definicion_descripcion'];
             $causas = $_POST['causas'];
@@ -129,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $impacto = $_POST['impacto'];
             $procesoCorrectivo = $_POST['proceso_correctivo'];
 
-            if ($registroController->crearRegistro($codigoMatriz, $fechaIdentificacion, $codigoRiesgo, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo)) {
+            if ($registroController->crearRegistro( $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $matriz_id)) {
                 header('Location: ../../Views/admin/manage/registros.php?mensaje=Registro creado correctamente.&matriz_id=' . $matriz_id );
             } else {
                 header('Location: ../../Views/admin/manage/registros.php?error=Error al crear el registro.&matriz_id=' . $matriz_id );
@@ -139,9 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Actualizar un registro existente
         if ($action === 'actualizar') {
             $id = $_POST['id'];
-            $codigoMatriz = $_POST['codigo'];
             $fechaIdentificacion = $_POST['fecha_identificacion'];
-            $codigoRiesgo = $_POST['codigo_riesgo'];
             $riesgo = $_POST['riesgo'];
             $definicionDescripcion = $_POST['definicion_descripcion'];
             $causas = $_POST['causas'];
@@ -154,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $impacto = $_POST['impacto'];
             $procesoCorrectivo = $_POST['proceso_correctivo'];
 
-            if ($registroController->actualizarRegistro($id, $codigoMatriz, $fechaIdentificacion, $codigoRiesgo, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo)) {
+            if ($registroController->actualizarRegistro($id, $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo)) {
                 header('Location: ../../Views/admin/manage/registros.php?mensaje=Registro actualizado correctamente.&matriz_id=' . $matriz_id );
             } else {
                 header('Location: ../../Views/admin/manage/registros.php?error=Error al actualizar el registro.&matriz_id=' . $matriz_id );

@@ -28,16 +28,8 @@ $content = ob_get_clean();
                             <input type="text" class="form-control" id="idInput" name="id">
                         </div>
                         <div class="mb-3">
-                            <label for="codigoInput" class="form-label">Código de matriz de riesgo</label>
-                            <input type="text" class="form-control" name="codigo" id="codigoInput">
-                        </div>
-                        <div class="mb-3">
                             <label for="fechaInput" class="form-label">Fecha de identificación de riesgo</label>
                             <input type="date" class="form-control" name="fecha_identificacion" id="fechaInput">
-                        </div>
-                        <div class="mb-3">
-                            <label for="codigoRiesgoInput" class="form-label">Código del riesgo</label>
-                            <input type="text" class="form-control" name="codigo_riesgo" id="codigoRiesgoInput">
                         </div>
                         <div class="mb-3">
                             <label for="riesgoInput" class="form-label">Riesgo</label>

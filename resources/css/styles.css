@@ -2,7 +2,8 @@ body {
   background-color: #061372;
   color: #fff;
   font-family: "Arial", sans-serif;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: none;
   font-size: large;
   font-weight: bold;
 }
@@ -39,7 +40,7 @@ label {
 }
 
 .menu-link:hover {
-  background-color: #e9ecef;
+  background-color: #0d61b6;
 }
 
 .menu-link i {
@@ -148,7 +149,7 @@ label {
 
 .shadow-item:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 table {
@@ -164,11 +165,13 @@ th, td {
 }
 
 a {
-  color: purple !important;
+  color: #ffffff !important;
+}
+tr {
+  font-size: 12px !important;
 }
 
 tr:hover {
-  background-color: #fff;
   color: #000;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.425);
 }
@@ -185,10 +188,14 @@ form {
   color: #000;
 }
 
+.modal > select, input[type="search"] {
+  color: #fff !important;
+  text-shadow: 1px 1px 1px #000;
+
+}
+
 .modal-title, select, input[type="text"], input[type="number"], input[type="date"], input[type="email"], input[type="password"], textarea {
   color: #000 !important;
-}
-select, input[type="search"] {
-  color: #fff !important;
-
+  text-shadow: 1px 1px 1px #fff;
+  background-color: #fff;
 }

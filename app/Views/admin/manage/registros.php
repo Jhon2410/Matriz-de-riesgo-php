@@ -14,12 +14,10 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
 $mensaje = isset($_GET['mensaje']) ? $_GET['mensaje'] : null;
 $matriz_id = isset($_GET['matriz_id']) ? $_GET['matriz_id'] : null;
 require '../../../Controllers/matriz/ObtenerRegistrosPorIdMatriz.php';
-
 ?>
 
 <!-- Contenido específico de la vista -->
 <div class="container-fluid my-3">
-
     <h4>Administrar los registros de las matrices de riesgo</h4>
     <?php require_once './components/modalRegsitro.php'; ?>
     <?php if (isset($error)): ?>
@@ -41,66 +39,30 @@ require '../../../Controllers/matriz/ObtenerRegistrosPorIdMatriz.php';
                 <th>Definición y Descripción del Riesgo</th>
                 <th>Causas</th>
                 <th>Afecta Infraestructura Crítica</th>
-                <th>Activos de Información Asociados</th>
-                <th>Tipo de Activo Vinculado</th>
-                <th>Criticidad del Activo</th>
                 <th>Tipo de Riesgo</th>
                 <th>Posibilidad de Ocurrencia</th>
                 <th>Impacto</th>
                 <th>Proceso Correctivo</th>
-                <th>Id de Matriz de Riesgo</th>
                 <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($registros as $registro): ?>
                 <tr>
-                    <td>
-                        <?php echo $registro['id'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['fecha_identificacion'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['riesgo'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['definicion_descripcion'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['causas'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['afecta_infraestructura_critica'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['activos_informacion_asociados'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['tipo_activo_vinculado'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['criticidad_activo'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['tipo_riesgo'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['posibilidad_ocurrencia'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['impacto'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['proceso_correctivo'] ?>
-                    </td>
-                    <td>
-                        <?php echo $registro['matriz_riesgo_id'] ?>
-                    </td>
+                    <td><?php echo $registro['id'] ?></td>
+                    <td><?php echo $registro['fecha_identificacion'] ?></td>
+                    <td><?php echo $registro['riesgo'] ?></td>
+                    <td><?php echo $registro['definicion_descripcion'] ?></td>
+                    <td><?php echo $registro['causas'] ?></td>
+                    <td><?php echo $registro['afecta_infraestructura_critica'] ?></td>
+                    <td><?php echo $registro['tipo_riesgo'] ?></td>
+                    <td><?php echo $registro['posibilidad_ocurrencia'] ?></td>
+                    <td><?php echo $registro['impacto'] ?></td>
+                    <td><?php echo $registro['proceso_correctivo'] ?></td>
                     <td>
                         <button class="btn btn-primary btn-sm"
                             onclick='setRegistroToEdit(<?php echo json_encode($registro); ?>)'
-                            data-user-id="<?php echo $registro['id']; ?>">
+                           >
                             <i class="bi bi-pencil-fill"></i>
                         </button>
                         <form action="../../../Controllers/registros/RegistrosMatrizController.php?action=eliminar&matriz_id=<?php echo $matriz_id ?>"
@@ -109,7 +71,6 @@ require '../../../Controllers/matriz/ObtenerRegistrosPorIdMatriz.php';
                             <button type="submit" class="btn btn-sm btn-danger">
                                 <i class="bi bi-trash-fill"></i>
                             </button>
-
                         </form>
                     </td>
                 </tr>
@@ -128,7 +89,6 @@ require '../../../Controllers/matriz/ObtenerRegistrosPorIdMatriz.php';
             }
 
             const idInput = document.getElementById('idInput');
-            const codigoInput = document.getElementById('codigoInput');
             const fechaInput = document.getElementById('fechaInput');
             const codigoRiesgoInput = document.getElementById('codigoRiesgoInput');
             const riesgoInput = document.getElementById('riesgoInput');
@@ -147,9 +107,7 @@ require '../../../Controllers/matriz/ObtenerRegistrosPorIdMatriz.php';
             form[0].action = '../../../Controllers/registros/RegistrosMatrizController.php?action=actualizar&matriz_id=' + <?php echo $matriz_id ?> + '';
 
             idInput.value = matriz.id;
-            codigoInput.value = matriz.codigo;
             fechaInput.value = matriz.fecha_identificacion;
-            codigoRiesgoInput.value = matriz.codigo_riesgo;
             riesgoInput.value = matriz.riesgo;
             descripcionInput.value = matriz.definicion_descripcion;
             causasInput.value = matriz.causas;
@@ -164,7 +122,5 @@ require '../../../Controllers/matriz/ObtenerRegistrosPorIdMatriz.php';
 
             $('#crearModal').modal('show');
         }
-
-
     </script>
 </div>

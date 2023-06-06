@@ -4,7 +4,7 @@ $pageTitle = 'main';
 ob_start();
 $content = ob_get_clean();
 require '../../layouts/admin.php';
-require '../../../Controllers/matriz/ObtenerMatrizController.php';
+require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
 ?>
    <script>
         function clasificarRiesgo(nivelImpacto, nivelProbabilidad) {
@@ -136,8 +136,11 @@ require '../../../Controllers/matriz/ObtenerMatrizController.php';
                 if (celda) {
                     var parrafo = document.createElement('p');
                     parrafo.setAttribute('class', 'shadow-item');
-                    parrafo.textContent = clasificacion + registro['riesgo'];
-                    
+                    parrafo.textContent = registro['riesgo'];
+                    parrafo.setAttribute('title', clasificacion);
+                    parrafo.setAttribute('data-toggle', 'tooltip');
+                    parrafo.setAttribute('data-placement', 'top');
+                    parrafo.setAttribute('data-html', 'true');
                     celda.appendChild(parrafo);
                 }
             });
