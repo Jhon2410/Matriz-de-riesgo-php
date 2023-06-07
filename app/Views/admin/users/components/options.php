@@ -46,7 +46,7 @@ $content = ob_get_clean();
                         </div>
                         <div class="mb-3">
                             <label for="rolSelect" class="form-label">Rol</label>
-                            <select class="form-select" id="rolSelect" name="rol">
+                            <select class="form-select" id="rolSelect" name="tipo">
                                 <option selected>Selecciona un rol</option>
                                 <option value="administrador">Administrador</option>
                                 <option value="empresa">Empresa</option>

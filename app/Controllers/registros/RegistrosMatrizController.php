@@ -55,12 +55,16 @@ class RegistroController
         $query = "UPDATE registros SET  fecha_identificacion = ?, riesgo = ?, definicion_descripcion = ?, causas = ?, afecta_infraestructura_critica = ?, activos_informacion_asociados = ?, tipo_activo_vinculado = ?, criticidad_activo = ?, tipo_riesgo = ?, posibilidad_ocurrencia = ?, impacto = ?, proceso_correctivo = ? WHERE id = ?";
         $stmt = $conn->prepare($query);
         if ($stmt) {
-            $stmt->bind_param("ssssssssssssi", $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $id);
+            $stmt->bind_param("sssssssssssss", $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $id);
 
             if ($stmt->execute()) {
                 echo "Registro actualizado correctamente.";
+                return true;
+
             } else {
                 echo "Error al actualizar el registro: " . $stmt->error;
+                return false;
+
             }
 
             $stmt->close();
@@ -91,6 +95,7 @@ class RegistroController
         }
 
         $conn->close();
+        return true;
     }
 }
 
@@ -118,10 +123,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $impacto = $_POST['impacto'];
             $procesoCorrectivo = $_POST['proceso_correctivo'];
 
-            if ($registroController->crearRegistro( $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $matriz_id)) {
-                header('Location: ../../Views/admin/manage/registros.php?mensaje=Registro creado correctamente.&matriz_id=' . $matriz_id );
+            if ($registroController->crearRegistro($fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $matriz_id)) {
+                header('Location: ../../Views/admin/manage/registros.php?mensaje=Registro creado correctamente.&matriz_id=' . $matriz_id);
             } else {
-                header('Location: ../../Views/admin/manage/registros.php?error=Error al crear el registro.&matriz_id=' . $matriz_id );
+                header('Location: ../../Views/admin/manage/registros.php?error=Error al crear el registro.&matriz_id=' . $matriz_id);
             }
         }
 
@@ -142,9 +147,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $procesoCorrectivo = $_POST['proceso_correctivo'];
 
             if ($registroController->actualizarRegistro($id, $fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo)) {
-                header('Location: ../../Views/admin/manage/registros.php?mensaje=Registro actualizado correctamente.&matriz_id=' . $matriz_id );
+                header('Location: ../../Views/admin/manage/registros.php?mensaje=Registro actualizado correctamente.&matriz_id=' . $matriz_id);
             } else {
-                header('Location: ../../Views/admin/manage/registros.php?error=Error al actualizar el registro.&matriz_id=' . $matriz_id );
+                header('Location: ../../Views/admin/manage/registros.php?error=Error al actualizar el registro.&matriz_id=' . $matriz_id);
 
             }
         }
@@ -154,10 +159,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
 
             if ($registroController->eliminarRegistro($id)) {
-                header('Location: ../../Views/admin/manage/registros.php?mensaje=Registro eliminado correctamente.&matriz_id=' . $matriz_id );
+                header('Location: ../../Views/admin/manage/registros.php?mensaje=Registro eliminado correctamente.&matriz_id=' . $matriz_id);
 
             } else {
-                header('Location: ../../Views/admin/manage/registros.php?error=Error al eliminar el registro.&matriz_id=' . $matriz_id );
+                header('Location: ../../Views/admin/manage/registros.php?error=Error al eliminar el registro.&matriz_id=' . $matriz_id);
 
             }
         }

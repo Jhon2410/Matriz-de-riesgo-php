@@ -1,7 +1,8 @@
 <?php
 require_once '../util/db.php';
 
-// app/Controllers/LoginController.php
+// Iniciar la sesión
+session_start();
 
 // Verificar si se ha enviado el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_POST['password'])) {
@@ -13,31 +14,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_P
 
     // Escapar los valores para evitar inyección de SQL
     $email = $conn->real_escape_string($email);
-    $password = $conn->real_escape_string($password);
 
-    // Construir la consulta para verificar las credenciales
-    $query = "SELECT * FROM usuarios WHERE email = '$email' AND contraseña = '$password'";
+    // Construir la consulta para obtener el hash de contraseña del usuario
+    $query = "SELECT contraseña FROM usuarios WHERE email = '$email' AND estado = 'activo'";
     $result = $conn->query($query);
 
-    // Verificar si se encontró un usuario con las credenciales proporcionadas
+    // Verificar si se encontró un usuario con el correo proporcionado
     if ($result->num_rows === 1) {
-        // Valor que deseas guardar en la cookie
-        $valor = $query;
+        $row = $result->fetch_assoc();
+        $hashedPassword = $row['contraseña'];
 
-        // Duración de la cookie en segundos (por ejemplo, 1 hora)
-        $duracion = time() + 3600;
+        // Verificar la contraseña utilizando password_verify()
+        if (password_verify($password, $hashedPassword)) {
+            // Guardar el estado de inicio de sesión en la sesión
+            $_SESSION['loggedin'] = true;
+            $_SESSION['email'] = $email;
 
-        // Configurar la cookie utilizando setcookie()
-        setcookie("mi_cookie", $valor, $duracion, "/");
-        // Redirigir al usuario a la página de inicio después de iniciar sesión exitosamente
-        header('Location: ../Views/admin/home/main.php');
-        exit;
-    } else {
-        $error = 'Credenciales inválidas. Por favor, inténtalo de nuevo.';
-        // Redirigir de vuelta al formulario de inicio de sesión con un mensaje de error
-        header('Location: ../Views/login.php?error=' . urlencode($error));
-        exit;
+            // Redirigir al usuario a la página de inicio después de iniciar sesión exitosamente
+            header('Location: ../Views/admin/home/main.php');
+            exit;
+        }
     }
+
+    // Si las credenciales son inválidas o el usuario está inactivo, redirigir al formulario de inicio de sesión con un mensaje de error
+    $error = 'Credenciales inválidas o usuario inactivo. Por favor, inténtalo de nuevo.';
+    header('Location: ../Views/login.php?error=' . urlencode($error));
+    exit;
 }
 
 // Redirigir de vuelta al formulario de inicio de sesión si no se enviaron las credenciales

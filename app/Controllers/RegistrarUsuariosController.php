@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && isset($_
     // Escapar los valores para evitar inyección de SQL
     $nombre = $conn->real_escape_string($nombre);
     $email = $conn->real_escape_string($email);
-    $contraseña = $conn->real_escape_string($contraseña);
+    $contraseña = password_hash($conn->real_escape_string($contraseña), PASSWORD_DEFAULT);
     $rol = $conn->real_escape_string($rol);
     $estado = $conn->real_escape_string($estado);
 

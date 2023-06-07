@@ -1,4 +1,12 @@
 <!-- app/Views/layouts/admin-layout.php -->
+<?php
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // El usuario no ha iniciado sesión, redirigir al formulario de inicio de sesión
+    header('Location: ../../login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,9 +40,7 @@
                 <i class="bi bi-person-circle"></i>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Perfil</a></li>
-                <li><a class="dropdown-item" href="#">Configuración</a></li>
-                <li><a class="dropdown-item" href="../../login.php">Salir</a></li>
+                <li><a class="dropdown-item" href="../../../Controllers/Logout.php">Salir</a></li>
             </ul>
         </span>
     </div>

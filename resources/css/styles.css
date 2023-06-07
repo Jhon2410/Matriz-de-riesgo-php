@@ -199,3 +199,8 @@ form {
   text-shadow: 1px 1px 1px #fff;
   background-color: #fff;
 }
+
+.dropdown-item {
+  color: #061372 !important;
+}
+
