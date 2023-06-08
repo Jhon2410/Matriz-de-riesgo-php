@@ -88,7 +88,6 @@ $contador = 0;
 
     <?php foreach ($matriz_de_riesgo as $index => $matriz): ?>
         <table class="matriz-riesgo-table my-3">
-
             <thead>
                 <tr>
                     <th>
@@ -252,25 +251,6 @@ $contador = 0;
                 var matriz_riesgo_id = document.createElement('p');
                 matriz_riesgo_id.textContent = 'Matriz riesgo id: ' + registro.matriz_riesgo_id;
                 itemDetails.appendChild(matriz_riesgo_id);
-
-                var peso = 80;
-                var altura = 1.80;
-
-                var imc = calcularIMC(peso, altura);
-                var pesoIdeal = calcularPesoIdeal(altura);
-
-                var imc = calcularIMC(peso, altura);
-                var pesoIdeal = calcularPesoIdeal(altura);
-
-
-                //muestralo en el modal
-                var imc = document.createElement('p');
-                imc.textContent = 'IMC: ' + imc;
-                itemDetails.appendChild(imc);
-
-                var pesoIdeal = document.createElement('p');
-                pesoIdeal.textContent = 'Peso ideal: ' + pesoIdeal;
-                itemDetails.appendChild(pesoIdeal);
 
                 // Mostrar el modal
                 $('#itemModal').modal('show');
