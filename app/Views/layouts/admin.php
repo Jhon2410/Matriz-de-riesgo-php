@@ -58,6 +58,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <i class="bi bi-grid-fill me-2"></i>
                 <span>Matriz de riesgo</span>
             </a>
+            <?php if ($_SESSION['rol'] == 'administrador') { ?>
             <a href="../manage/index.php" class="menu-link">
                 <i class="bi bi-kanban-fill"></i>
                 <span>Administrar matrices de riesgo</span>
@@ -66,6 +67,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <i class="bi bi-people-fill me-2"></i>
                 <span>Administrar usuarios</span>
             </a>
+            <?php } ?>
             <a href="../info/index.php" class="menu-link">
             <i class="bi bi-info-square-fill"></i>
                 <span>Información</span>

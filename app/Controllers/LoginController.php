@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_P
     $email = $conn->real_escape_string($email);
 
     // Construir la consulta para obtener el hash de contraseña del usuario
-    $query = "SELECT contraseña FROM usuarios WHERE email = '$email' AND estado = 'activo'";
+    $query = "SELECT contraseña, tipo FROM usuarios WHERE email = '$email' AND estado = 'activo'";
     $result = $conn->query($query);
 
     // Verificar si se encontró un usuario con el correo proporcionado
@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_P
             // Guardar el estado de inicio de sesión en la sesión
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;
+            $_SESSION['tipo'] = $row['tipo'];
 
             // Redirigir al usuario a la página de inicio después de iniciar sesión exitosamente
             header('Location: ../Views/admin/home/main.php');
