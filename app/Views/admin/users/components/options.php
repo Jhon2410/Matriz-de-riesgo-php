@@ -49,9 +49,7 @@ $content = ob_get_clean();
                             <select class="form-select" id="rolSelect" name="tipo">
                                 <option selected>Selecciona un rol</option>
                                 <option value="administrador">Administrador</option>
-                                <option value="empresa">Empresa</option>
-                                <option value="gestor_empresa">Gestor empresa</option>
-                                <option value="integrante_empresa">Integrante empresa</option>
+                                <option value="integrante_empresa">Integrante</option>
                             </select>
                         </div>
                         <div class="mb-3">
