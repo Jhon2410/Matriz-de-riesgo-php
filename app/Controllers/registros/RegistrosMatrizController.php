@@ -123,11 +123,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $impacto = $_POST['impacto'];
             $procesoCorrectivo = $_POST['proceso_correctivo'];
 
-            if ($registroController->crearRegistro($fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $matriz_id)) {
-                header('Location: ../../Views/admin/manage/registros.php?mensaje=Registro creado correctamente.&matriz_id=' . $matriz_id);
-            } else {
-                header('Location: ../../Views/admin/manage/registros.php?error=Error al crear el registro.&matriz_id=' . $matriz_id);
-            }
+            $registroController->crearRegistro($fechaIdentificacion, $riesgo, $definicionDescripcion, $causas, $afectaInfraestructuraCritica, $activosInformacionAsociados, $tipoActivoVinculado, $criticidadActivo, $tipoRiesgo, $posibilidadOcurrencia, $impacto, $procesoCorrectivo, $matriz_id);
+            header('Location: ../../Views/admin/manage/registros.php?mensaje=Registro creado correctamente.&matriz_id=' . $matriz_id);
+
         }
 
         // Actualizar un registro existente

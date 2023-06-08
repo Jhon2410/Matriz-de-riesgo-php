@@ -5,6 +5,7 @@ ob_start();
 $content = ob_get_clean();
 require '../../layouts/admin.php';
 require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
+$contador = 0;
 ?>
 
 <style>
@@ -25,39 +26,6 @@ require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
     }
 </style>
 
-<script>
-    function mostrarModal(detalle) {
-        // Buscar el registro correspondiente al detalle proporcionado
-        var registro = <?php echo json_encode($matriz['registros']); ?>.find(function (registro) {
-            return registro['riesgo'] === detalle;
-        });
-
-        if (registro) {
-            var itemDetails = document.getElementById('itemDetails');
-            itemDetails.innerHTML = '';
-
-            // Crear elementos HTML para mostrar los detalles del riesgo
-            var titulo = document.createElement('h4');
-            titulo.textContent = detalle;
-            itemDetails.appendChild(titulo);
-
-            var impacto = document.createElement('p');
-            impacto.textContent = 'Nivel de impacto: ' + registro['impacto'];
-            itemDetails.appendChild(impacto);
-
-            var probabilidad = document.createElement('p');
-            probabilidad.textContent = 'Nivel de probabilidad: ' + registro['posibilidad_ocurrencia'];
-            itemDetails.appendChild(probabilidad);
-
-            var probabilidad = document.createElement('p');
-            probabilidad.textContent = 'Caso de control: ' + registro['proceso_correctivo'];
-            itemDetails.appendChild(probabilidad);
-
-            // Mostrar el modal
-            $('#itemModal').modal('show');
-        }
-    }
-</script>
 
 <script>
 
@@ -100,6 +68,7 @@ require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
     }
 
 </script>
+
 <!-- Contenido específico de la vista -->
 <div class="container-fluid my-3">
     <!-- Modal -->
@@ -117,8 +86,10 @@ require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
         </div>
     </div>
 
-    <?php foreach ($matriz_de_riesgo as $matriz): ?>
+    <?php foreach ($matriz_de_riesgo as $index => $matriz): ?>
+        <?php echo $index; ?>
         <table class="matriz-riesgo-table my-3">
+      
             <thead>
                 <tr>
                     <th>
@@ -132,74 +103,105 @@ require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
             <tbody>
                 <tr>
                     <th>Bajo</th>
-                    <td class="controlable" id="<?php echo $matriz['codigo'] ?>_controlable"></td>
-                    <td class="atencion" id="<?php echo $matriz['codigo'] ?>_atencion"></td>
-                    <td class="prioridad" id="<?php echo $matriz['codigo'] ?>_prioridad"></td>
+                    <td class="controlable" id="<?php echo $matriz['id'] ?>_controlable<?php echo $index; ?>b"></td>
+                    <td class="atencion" id="<?php echo $matriz['id'] ?>_atencion<?php echo $index; ?>b"></td>
+                    <td class="prioridad" id="<?php echo $matriz['id'] ?>_prioridad<?php echo $index; ?>b"></td>
                 </tr>
                 <tr>
                     <th>Medio</th>
-                    <td class="atencion" id="<?php echo $matriz['codigo'] ?>_atencion"></td>
-                    <td class="importante" id="<?php echo $matriz['codigo'] ?>_importante"></td>
-                    <td class="alta-prioridad" id="<?php echo $matriz['codigo'] ?>_alta-prioridad"></td>
+                    <td class="atencion" id="<?php echo $matriz['id'] ?>_atencion<?php echo $index; ?>m"></td>
+                    <td class="importante" id="<?php echo $matriz['id'] ?>_importante<?php echo $index; ?>m"></td>
+                    <td class="alta-prioridad" id="<?php echo $matriz['id'] ?>_alta-prioridad<?php echo $index; ?>m"></td>
                 </tr>
                 <tr>
                     <th>Alto</th>
-                    <td class="prioridad" id="<?php echo $matriz['codigo'] ?>_prioridad"></td>
-                    <td class="alta-prioridad" id="<?php echo $matriz['codigo'] ?>_alta-prioridad"></td>
-                    <td class="critico" id="<?php echo $matriz['codigo'] ?>_critico"></td>
+                    <td class="prioridad" id="<?php echo $matriz['id'] ?>_prioridad<?php echo $index; ?>a"></td>
+                    <td class="alta-prioridad" id="<?php echo $matriz['id'] ?>_alta-prioridad<?php echo $index; ?>a"></td>
+                    <td class="critico" id="<?php echo $matriz['id'] ?>_critico<?php echo $index; ?>a"></td>
                 </tr>
             </tbody>
         </table>
-
-
+     
         <script>
+            
+            function mostrarModal(detalle) {
+                // Buscar el registro correspondiente al detalle proporcionado
+                var registro = <?php echo json_encode($matriz['registros']); ?>.find(function (registro) {
+                    return registro['riesgo'] === detalle;
+                });
+
+                if (registro) {
+                    var itemDetails = document.getElementById('itemDetails');
+                    itemDetails.innerHTML = '';
+
+                    // Crear elementos HTML para mostrar los detalles del riesgo
+                    var titulo = document.createElement('h4');
+                    titulo.textContent = detalle;
+                    itemDetails.appendChild(titulo);
+
+                    var impacto = document.createElement('p');
+                    impacto.textContent = 'Nivel de impacto: ' + registro['impacto'];
+                    itemDetails.appendChild(impacto);
+
+                    var probabilidad = document.createElement('p');
+                    probabilidad.textContent = 'Nivel de probabilidad: ' + registro['posibilidad_ocurrencia'];
+                    itemDetails.appendChild(probabilidad);
+
+                    var probabilidad = document.createElement('p');
+                    probabilidad.textContent = 'Caso de control: ' + registro['proceso_correctivo'];
+                    itemDetails.appendChild(probabilidad);
+
+                    // Mostrar el modal
+                    $('#itemModal').modal('show');
+                }
+            }
             var registros = <?php echo json_encode($matriz['registros']); ?>;
 
             if (registros && registros.length > 0 && registros[0]['id'] !== null) {
-                registros.forEach(function (registro) {
+                registros.forEach(function (registro, index) {
                     var nivelImpacto = registro['impacto'];
                     var nivelProbabilidad = registro['posibilidad_ocurrencia'];
                     var clasificacion = clasificarRiesgo(nivelImpacto, nivelProbabilidad);
 
                     var celda;
-
+                    
                     switch (nivelImpacto) {
                         case 'Bajo':
                             switch (nivelProbabilidad) {
                                 case 'Bajo':
-                                    celda = document.getElementById('<?php echo $matriz['codigo'] ?>_controlable');
+                                    celda = document.getElementById('<?php echo $matriz['id'] ?>_controlable<?php echo $index; ?>b');
                                     break;
                                 case 'Medio':
-                                    celda = document.getElementById('<?php echo $matriz['codigo'] ?>_atencion');
+                                    celda = document.getElementById('<?php echo $matriz['id'] ?>_atencion<?php echo $index; ?>b');
                                     break;
                                 case 'Alto':
-                                    celda = document.getElementById('<?php echo $matriz['codigo'] ?>_prioridad');
+                                    celda = document.getElementById('<?php echo $matriz['id'] ?>_prioridad<?php echo $index; ?>b');
                                     break;
                             }
                             break;
                         case 'Medio':
                             switch (nivelProbabilidad) {
                                 case 'Bajo':
-                                    celda = document.getElementById('<?php echo $matriz['codigo'] ?>_atencion');
+                                    celda = document.getElementById('<?php echo $matriz['id'] ?>_atencion<?php echo $index; ?>m');
                                     break;
                                 case 'Medio':
-                                    celda = document.getElementById('<?php echo $matriz['codigo'] ?>_importante');
+                                    celda = document.getElementById('<?php echo $matriz['id'] ?>_importante<?php echo $index; ?>m');
                                     break;
                                 case 'Alto':
-                                    celda = document.getElementById('<?php echo $matriz['codigo'] ?>_alta-prioridad');
+                                    celda = document.getElementById('<?php echo $matriz['id'] ?>_alta-prioridad<?php echo $index; ?>m');
                                     break;
                             }
                             break;
                         case 'Alto':
                             switch (nivelProbabilidad) {
                                 case 'Bajo':
-                                    celda = document.getElementById('<?php echo $matriz['codigo'] ?>_prioridad');
+                                    celda = document.getElementById('<?php echo $matriz['id'] ?>_prioridad<?php echo $index; ?>a');
                                     break;
                                 case 'Medio':
-                                    celda = document.getElementById('<?php echo $matriz['codigo'] ?>_alta-prioridad');
+                                    celda = document.getElementById('<?php echo $matriz['id'] ?>_alta-prioridad<?php echo $index; ?>a');
                                     break;
                                 case 'Alto':
-                                    celda = document.getElementById('<?php echo $matriz['codigo'] ?>_critico');
+                                    celda = document.getElementById('<?php echo $matriz['id'] ?>_critico<?php echo $index; ?>a');
                                     break;
                             }
                             break;
