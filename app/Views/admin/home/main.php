@@ -6,6 +6,25 @@ $content = ob_get_clean();
 require '../../layouts/admin.php';
 require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
 ?>
+
+<style>
+    .btn {
+        margin: 0px 0px 0px 0px;
+    }
+
+    .btn-group {
+        margin: 0px 0px 0px 0px;
+    }
+
+    #itemDetails {
+        margin: 0px 0px 0px 0px;
+        padding: 15px;
+        font-size: small;
+        background-color: #000;
+        color: #0f0 !important;
+    }
+</style>
+
 <script>
     function mostrarModal(detalle) {
         // Buscar el registro correspondiente al detalle proporcionado
@@ -28,6 +47,10 @@ require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
 
             var probabilidad = document.createElement('p');
             probabilidad.textContent = 'Nivel de probabilidad: ' + registro['posibilidad_ocurrencia'];
+            itemDetails.appendChild(probabilidad);
+
+            var probabilidad = document.createElement('p');
+            probabilidad.textContent = 'Caso de control: ' + registro['proceso_correctivo'];
             itemDetails.appendChild(probabilidad);
 
             // Mostrar el modal
@@ -86,9 +109,6 @@ require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="itemModalLabel">Detalles del elemento</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <div class="modal-body">
                     <div id="itemDetails"></div>
