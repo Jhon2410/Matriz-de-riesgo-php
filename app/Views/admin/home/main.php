@@ -7,37 +7,37 @@ require '../../layouts/admin.php';
 require '../../../Controllers/matriz/MatrizObtenerMatrizController.php';
 ?>
 <script>
-  function mostrarModal(detalle) {
-    // Buscar el registro correspondiente al detalle proporcionado
-    var registro = <?php echo json_encode($matriz['registros']); ?>.find(function(registro) {
-      return registro['riesgo'] === detalle;
-    });
+    function mostrarModal(detalle) {
+        // Buscar el registro correspondiente al detalle proporcionado
+        var registro = <?php echo json_encode($matriz['registros']); ?>.find(function (registro) {
+            return registro['riesgo'] === detalle;
+        });
 
-    if (registro) {
-      var itemDetails = document.getElementById('itemDetails');
-      itemDetails.innerHTML = '';
+        if (registro) {
+            var itemDetails = document.getElementById('itemDetails');
+            itemDetails.innerHTML = '';
 
-      // Crear elementos HTML para mostrar los detalles del riesgo
-      var titulo = document.createElement('h4');
-      titulo.textContent = detalle;
-      itemDetails.appendChild(titulo);
+            // Crear elementos HTML para mostrar los detalles del riesgo
+            var titulo = document.createElement('h4');
+            titulo.textContent = detalle;
+            itemDetails.appendChild(titulo);
 
-      var impacto = document.createElement('p');
-      impacto.textContent = 'Nivel de impacto: ' + registro['impacto'];
-      itemDetails.appendChild(impacto);
+            var impacto = document.createElement('p');
+            impacto.textContent = 'Nivel de impacto: ' + registro['impacto'];
+            itemDetails.appendChild(impacto);
 
-      var probabilidad = document.createElement('p');
-      probabilidad.textContent = 'Nivel de probabilidad: ' + registro['posibilidad_ocurrencia'];
-      itemDetails.appendChild(probabilidad);
+            var probabilidad = document.createElement('p');
+            probabilidad.textContent = 'Nivel de probabilidad: ' + registro['posibilidad_ocurrencia'];
+            itemDetails.appendChild(probabilidad);
 
-      // Mostrar el modal
-      $('#itemModal').modal('show');
+            // Mostrar el modal
+            $('#itemModal').modal('show');
+        }
     }
-  }
 </script>
 
 <script>
-  
+
 
     function clasificarRiesgo(nivelImpacto, nivelProbabilidad) {
         switch (nivelImpacto) {
