@@ -1,12 +1,12 @@
 <?php
 require_once '../util/db.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && isset($_POST['email']) && isset($_POST['contraseña']) && isset($_POST['rol']) && isset($_POST['estado'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && isset($_POST['email']) && isset($_POST['contraseña']) && isset($_POST['tipo']) && isset($_POST['estado'])) {
     // Obtener los datos del formulario
     $nombre = $_POST['nombre'];
     $email = $_POST['email'];
     $contraseña = $_POST['contraseña'];
-    $rol = $_POST['rol'];
+    $rol = $_POST['tipo'];
     $estado = $_POST['estado'];
 
     // Establecer la conexión a la base de datos

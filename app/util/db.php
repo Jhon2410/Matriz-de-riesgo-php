@@ -1,6 +1,4 @@
 <?php
-
-// include_once '../helpers/validadorSession.php';
 class Database {
     private static $servername = "localhost";
     private static $username = "root";
